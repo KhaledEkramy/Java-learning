@@ -1,0 +1,505 @@
+WEBVTT
+
+1
+00:00:02.200 --> 00:00:04.426
+So far we've be talking
+about running time,
+
+2
+00:00:04.426 --> 00:00:08.070
+now we have to talk about the memory
+requirements of our programs as well.
+
+3
+00:00:09.710 --> 00:00:14.162
+While the basics are we want to know
+how many bits the program use or
+
+4
+00:00:14.162 --> 00:00:16.070
+bytes, 8 bytes at a time.
+
+5
+00:00:16.070 --> 00:00:21.440
+And actually we'll be talking in terms of
+millions of bytes or billions of bytes.
+
+6
+00:00:21.440 --> 00:00:26.060
+And actually surprisingly there is
+a controversy about even these basic
+
+7
+00:00:26.060 --> 00:00:27.570
+definitions.
+
+8
+00:00:27.570 --> 00:00:31.809
+Computer scientist think of
+a million bits as 2 to the 20th and
+
+9
+00:00:31.809 --> 00:00:37.225
+a billion is 2 to the 30th because that's
+the number of possible things that you
+
+10
+00:00:37.225 --> 00:00:42.586
+can fit into the 30 bytes and everything
+is consistent with our calculations.
+
+11
+00:00:42.586 --> 00:00:49.352
+Other scientists stick to one million and
+one billion for lot of reasons.
+
+12
+00:00:49.352 --> 00:00:52.649
+I will usually use a 2 to
+the 20th to mean a megabyte.
+
+13
+00:00:52.649 --> 00:00:58.479
+Now on old computers for
+many years use the 32 bytes machine so
+
+14
+00:00:58.479 --> 00:01:01.449
+that pointers were four bytes.
+
+15
+00:01:02.720 --> 00:01:07.562
+Just in recent years, we've mostly
+switched to a model where machines
+
+16
+00:01:07.562 --> 00:01:10.477
+are 64 bits, and pointers are 8 bytes.
+
+17
+00:01:10.477 --> 00:01:16.650
+That allows us to address much more
+memory, but pointers use much more space.
+
+18
+00:01:16.650 --> 00:01:22.260
+And actually, this transition
+caused a lot of problems initially,
+
+19
+00:01:22.260 --> 00:01:26.460
+because programs were using way more
+space than people thought they should.
+
+20
+00:01:26.460 --> 00:01:30.929
+You're not going to have to go through
+this kind of transition the way that we
+
+21
+00:01:30.929 --> 00:01:35.762
+did because 64-bits is definitely enough
+to address anything that you might
+
+22
+00:01:35.762 --> 00:01:36.862
+need to address.
+
+23
+00:01:36.862 --> 00:01:39.040
+Two to the 64th is really a huge number.
+
+24
+00:01:41.040 --> 00:01:47.210
+So in terms of bytes we have to
+start out with typical memory usage.
+
+25
+00:01:47.210 --> 00:01:51.200
+Now again this is very dependent
+on machine and implementation but
+
+26
+00:01:51.200 --> 00:01:56.950
+these numbers are reasonable and
+are found on typical implementations.
+
+27
+00:01:56.950 --> 00:02:01.053
+So a boolean, it would be nice if a
+boolean just took a bit, because it's just
+
+28
+00:02:01.053 --> 00:02:05.447
+true or false, but actually usually we
+have to count for a byte for a boolean.
+
+29
+00:02:05.447 --> 00:02:10.440
+One byte is a byte, character nowadays
+is 2 bytes, 16 bit characters.
+
+30
+00:02:10.440 --> 00:02:14.290
+Not that long ago,
+we used 8 bits for chars.
+
+31
+00:02:14.290 --> 00:02:18.000
+Integer, a regular int is 4.
+
+32
+00:02:18.000 --> 00:02:25.780
+Bytes or 32 bits and float is also 4
+bytes, long int is 8 and a double is 8.
+
+33
+00:02:25.780 --> 00:02:29.830
+Usually we use doubles for
+a floating point and ints for
+
+34
+00:02:29.830 --> 00:02:33.710
+integers in most applications.
+
+35
+00:02:33.710 --> 00:02:36.180
+So that's for primitive types.
+
+36
+00:02:36.180 --> 00:02:42.300
+And then for arrays there is a certain
+amount of overhead for making an array and
+
+37
+00:02:42.300 --> 00:02:48.436
+then if there's N items it's whatever
+the cost of the primitive type times N.
+
+38
+00:02:48.436 --> 00:02:52.678
+So, in array of doubles is say 8N + 24.
+
+39
+00:02:52.678 --> 00:02:56.750
+And two-dimensional array.
+
+40
+00:02:56.750 --> 00:03:01.900
+Then well, we can go ahead and
+compute the exact thing,
+
+41
+00:03:01.900 --> 00:03:05.250
+but now it's time to
+use the tilde notation.
+
+42
+00:03:05.250 --> 00:03:09.837
+Even for arrays, we could say a double
+is tilde 8N, for one-dimensional.
+
+43
+00:03:09.837 --> 00:03:15.102
+For two-dimensional, two-dimensional
+array of doubles is tilde 8 M N.
+
+44
+00:03:15.102 --> 00:03:18.695
+And there's extra terms for
+the overhead but for
+
+45
+00:03:18.695 --> 00:03:22.203
+large M and
+N that's going to be pretty accurate.
+
+46
+00:03:22.203 --> 00:03:25.081
+So that's our basic usage for
+primitive types and
+
+47
+00:03:25.081 --> 00:03:27.490
+arrays in a typical job implementation.
+
+48
+00:03:29.360 --> 00:03:33.720
+Now a lot of our programs use objects
+like Linklys and so forth, so
+
+49
+00:03:33.720 --> 00:03:37.080
+we also have to factor in object overhead.
+
+50
+00:03:38.150 --> 00:03:43.640
+The cost of reference and
+also there's padding built-in in typical
+
+51
+00:03:43.640 --> 00:03:49.430
+implementations to make it so that each
+object has to use a multiple of 8 bytes.
+
+52
+00:03:50.620 --> 00:03:57.650
+So for example if you had a date object
+that had three int instance variables,
+
+53
+00:03:57.650 --> 00:04:04.340
+then that object would take a total
+of 32 bytes each int takes 4 bytes.
+
+54
+00:04:04.340 --> 00:04:06.684
+Object overhead is 16 bytes.
+
+55
+00:04:06.684 --> 00:04:09.590
+I need 4 bytes for padding,
+so it's a total of 32 bytes.
+
+56
+00:04:11.830 --> 00:04:16.420
+So, and the other one that
+often comes up is a string.
+
+57
+00:04:16.420 --> 00:04:22.234
+And a string is a little bit more
+complicated than an array but
+
+58
+00:04:22.234 --> 00:04:28.162
+the typical implementation of
+a string in Java has a reference
+
+59
+00:04:28.162 --> 00:04:33.976
+out to an array of characters and
+then it's got int values for
+
+60
+00:04:33.976 --> 00:04:39.110
+offset, count and hash value and
+then some padding.
+
+61
+00:04:39.110 --> 00:04:41.260
+And adding it all together.
+
+62
+00:04:41.260 --> 00:04:46.710
+The [COUGH] cost of a string
+is about two N plus 64 bytes.
+
+63
+00:04:48.700 --> 00:04:53.133
+So these are the basics
+that we need to analyze
+
+64
+00:04:53.133 --> 00:04:57.574
+the memory usage for
+a typical Java program.
+
+65
+00:04:57.574 --> 00:05:02.413
+So for data type value, if it's
+a primitive type it's 4 for an int,
+
+66
+00:05:02.413 --> 00:05:04.425
+8 for a double and so forth.
+
+67
+00:05:04.425 --> 00:05:07.984
+If it's a reference it's going to be
+8 bytes, that's what a pointer takes.
+
+68
+00:05:07.984 --> 00:05:15.100
+Array, 24 bytes plus the memory for
+each entry, and an object, 16 bytes.
+
+69
+00:05:15.100 --> 00:05:20.115
+Plus the memory for the incidence variable
+plus if there's an inner class that's
+
+70
+00:05:20.115 --> 00:05:24.340
+another eight bytes as we talked about
+with nodes for linked lists, and
+
+71
+00:05:24.340 --> 00:05:25.460
+then there's the padding.
+
+72
+00:05:27.290 --> 00:05:33.310
+So then we have to think
+about who's responsible for
+
+73
+00:05:33.310 --> 00:05:36.640
+referenced objects In some cases.
+
+74
+00:05:36.640 --> 00:05:40.799
+And we'll take care of that when
+we get to these situations.
+
+75
+00:05:40.799 --> 00:05:45.175
+So as an example,
+a simple example of memory use analysis,
+
+76
+00:05:45.175 --> 00:05:49.813
+let's take a look at how much
+memory our WeightedQuickUnionUF
+
+77
+00:05:49.813 --> 00:05:53.943
+function from a few lectures
+ago uses as a function of N.
+
+78
+00:05:53.943 --> 00:05:58.856
+And there's only a couple
+of memory elements, and
+
+79
+00:05:58.856 --> 00:06:06.420
+each one of them are easily analyzed
+using the basics that we just gave.
+
+80
+00:06:06.420 --> 00:06:09.571
+It's an objects so
+the 16 bytes of object overhead.
+
+81
+00:06:09.571 --> 00:06:12.240
+There's two int arrays.
+
+82
+00:06:12.240 --> 00:06:17.106
+Each one of them have an array overhead
+
+83
+00:06:17.106 --> 00:06:21.527
+of 24 plus 4N for the N entries.
+
+84
+00:06:21.527 --> 00:06:24.547
+Each of the N entries takes four bytes.
+
+85
+00:06:24.547 --> 00:06:29.086
+And then there's four bytes for the count,
+and there's four bytes for the padding,
+
+86
+00:06:29.086 --> 00:06:30.768
+and if you add it all together.
+
+87
+00:06:30.768 --> 00:06:35.820
+It's 8N + 88 which tilde 8N.
+
+88
+00:06:35.820 --> 00:06:41.976
+Again, all that saying is when N is
+large all we are going to care about
+
+89
+00:06:41.976 --> 00:06:48.469
+in terms of analyzing the memory is
+that we've got [COUGH] two N integers.
+
+90
+00:06:49.820 --> 00:06:53.750
+Two arrays of size N,
+each one of which takes 4 bytes for
+
+91
+00:06:53.750 --> 00:06:55.840
+grand total of 8 N bytes.
+
+92
+00:06:57.310 --> 00:07:02.880
+Okay, so in summary,
+we really can figure out
+
+93
+00:07:02.880 --> 00:07:05.750
+how many times we have to turn
+the crank on modern computers.
+
+94
+00:07:06.780 --> 00:07:11.836
+We can do it with empirical analysis where
+we actually execute the programs to do
+
+95
+00:07:11.836 --> 00:07:17.278
+experiments and use assume power law,
+formulate hypothesis and make predictions.
+
+96
+00:07:17.278 --> 00:07:23.331
+But we can do more, we can do mathematical
+analysis where we can identify the most
+
+97
+00:07:23.331 --> 00:07:29.790
+costly operations, analyze the frequency
+of execution of those operations.
+
+98
+00:07:29.790 --> 00:07:33.310
+And using the tilde notation
+to simplify analysis,
+
+99
+00:07:33.310 --> 00:07:37.020
+we can actually explain the behavior,
+not just predict it.
+
+100
+00:07:37.020 --> 00:07:40.935
+And this is a fine example of
+the use of the scientific method to
+
+101
+00:07:40.935 --> 00:07:44.795
+understand artifacts that we're studying,
+algorithms.
+
+102
+00:07:44.795 --> 00:07:48.555
+Our mathematical models are usually
+independent of a particular
+
+103
+00:07:48.555 --> 00:07:53.000
+computer system and even applied to
+machines that are not yet built.
+
+104
+00:07:53.000 --> 00:07:58.082
+But we always validate our mathematical
+models by running experiments on real
+
+105
+00:07:58.082 --> 00:08:02.856
+machines, so that we can be confident
+when we're making predictions and
+
+106
+00:08:02.856 --> 00:08:04.477
+analyzing algorithms.
