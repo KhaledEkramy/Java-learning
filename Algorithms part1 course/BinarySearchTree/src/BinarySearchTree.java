@@ -90,6 +90,29 @@ public class BinarySearchTree<Key extends Comparable<Key>, Value> {
             return test;
         return current;
     }
+    public Value ceil(Key key){
+        Node result = ceil(root, key);
+        if(result == null){
+            return null;
+        }
+        return result.val;
+    }
+    private Node ceil(Node current, Key key){
+        if(current == null)
+            return null;
+        int cmp = key.compareTo(current.key);
+        if(cmp == 0){
+            return current;
+        }
+        if(cmp > 0)
+            return ceil(current.right, key);
+
+        Node test = ceil(current.left, key);
+        if(test != null){
+            return test;
+        }
+        return current;
+    }
 
     public int size(){
         return size(root);
