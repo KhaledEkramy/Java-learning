@@ -2,7 +2,7 @@ package org.example;
 
 public class Main {
     public static void main(String[] args) {
-        BinaryHeap<Integer> obj = new BinaryHeap<>(10);
+        BinaryHeap obj = new BinaryHeap(10);
         System.out.println(obj.isEmpty());
         obj.insert(10);
         obj.insert(20);
