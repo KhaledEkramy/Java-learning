@@ -8,5 +8,6 @@ public class Main {
         bst.put(3, "Ali");
         bst.put(8, "Ebrahim");
         System.out.println(bst.valueIterator().toString());
+        System.out.println(bst.size());
     }
 }

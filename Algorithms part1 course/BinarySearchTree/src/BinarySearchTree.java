@@ -1,17 +1,17 @@
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Queue;
 
 public class BinarySearchTree<Key extends Comparable<Key>, Value> {
     private Node root;
     private class Node{
-        private Key key;
+        private final Key key;
         private Value val;
         private Node left, right;
         private int count;
         public Node(Key key, Value val, int count){
             this.key = key;
             this.val = val;
+            this.count = count;
         }
     }
     public void put(Key key){
@@ -20,7 +20,7 @@ public class BinarySearchTree<Key extends Comparable<Key>, Value> {
     public void put(Key key, Value val){
         root = put(root, key, val);
     }
-    public Node put(Node current, Key key, Value val){
+    private Node put(Node current, Key key, Value val){
         if(current == null){
             return new Node(key, val, 1);
         }
@@ -76,7 +76,7 @@ public class BinarySearchTree<Key extends Comparable<Key>, Value> {
         }
         return current.val;
     }
-    public Node floor(Node current, Key key){
+    private Node floor(Node current, Key key){
         if(current == null){
             return null;
         }
@@ -94,7 +94,7 @@ public class BinarySearchTree<Key extends Comparable<Key>, Value> {
     public int size(){
         return size(root);
     }
-    public int size(Node current){
+    private int size(Node current){
         if(current == null)
             return 0;
         else
@@ -103,7 +103,7 @@ public class BinarySearchTree<Key extends Comparable<Key>, Value> {
     public int rank(Key key){
         return rank(key, root);
     }
-    public int rank(Key key, Node current){
+    private int rank(Key key, Node current){
         if(current == null)
             return 0;
         int cmp = key.compareTo(current.key);
