@@ -10,6 +10,7 @@ public class Main {
         obj.print();
         System.out.println(obj.isEmpty());
         System.out.println(obj.delMax());
+        System.out.println("Hello world");
         obj.insert(7);
         System.out.println(obj.delMin());
         System.out.println("==============");
