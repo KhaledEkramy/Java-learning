@@ -137,6 +137,25 @@ public class BinarySearchTree<Key extends Comparable<Key>, Value> {
         else
             return size(current.left);
     }
+    public void deleteMin(){
+        if(root == null)
+            return;
+        if(root.left == null){
+            root = root.right;
+            return;
+        }
+        Node previous = root, current = root.left;
+        while(current.left != null){
+            previous = current;
+            current = current.left;
+        }
+        previous.count--;
+        if(current.right != null){
+            previous.left = current.right;
+        }else{
+            previous.left = null;
+        }
+    }
     public Iterable<Key> keyIterator(){
         List<Key> list = new ArrayList<>();
         inorderKeys(root, list);
