@@ -53,11 +53,16 @@ public class BinarySearchTree<Key extends Comparable<Key>, Value> {
         if(root == null){
             return null;
         }
-        Node current = root;
+        Node current = getMin(root);
+        return current.val;
+    }
+    private Node getMin(Node current){
+        if(current == null)
+            return null;
         while(current.left != null){
             current = current.left;
         }
-        return current.val;
+        return current;
     }
     public Value getMax(){
         if(root == null){
