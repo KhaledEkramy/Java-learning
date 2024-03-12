@@ -59,10 +59,9 @@ public class BinarySearchTree<Key extends Comparable<Key>, Value> {
     private Node getMin(Node current){
         if(current == null)
             return null;
-        while(current.left != null){
-            current = current.left;
-        }
-        return current;
+        if(current.left == null)
+            return current;
+        return getMin(current.left);
     }
     public Value getMax(){
         if(root == null){
@@ -147,13 +146,19 @@ public class BinarySearchTree<Key extends Comparable<Key>, Value> {
             return;
         root = deleteMin(root);
     }
-    private Node deleteMin(Node x) {
-        if (x.left == null)
-            return x.right;
-        x.left = deleteMin(x.left);
-        x.count = 1 + size(x.left) + size(x.right);
-        return x;
+    private Node deleteMin(Node current) {
+        if (current == null)
+            return null;
+
+        if (current.left == null)
+            return current.right;
+
+        current.left = deleteMin(current.left);
+        current.count = 1 + size(current.left) + size(current.right);
+
+        return current;
     }
+
     public void deleteMax(){//recursive
         if(root == null)
             return;
@@ -185,6 +190,35 @@ public class BinarySearchTree<Key extends Comparable<Key>, Value> {
 //            previous.left = null;
 //        }
 //    }
+
+    public void delete(Key key){
+        root = delete(root, key);
+    }
+    private Node delete(Node current, Key key){
+        if(current == null)
+            return null;
+        int cmp = key.compareTo(current.key);
+
+        if(cmp < 0)
+            current.left = delete(current.left, key);
+
+        else if(cmp > 0)
+            current.right = delete(current.right, key);
+
+        else{
+            if(current.right == null)
+                return current.left;
+            if(current.left == null)
+                return current.right;
+
+            Node successor = getMin(current.right);
+            successor.right = deleteMin(current.right);
+            successor.left = current.left;
+            current = successor;
+        }
+        current.count = 1 + size(current.left) + size(current.right);
+        return current;
+    }
     public Iterable<Key> keyIterator(){
         List<Key> list = new ArrayList<>();
         inorderKeys(root, list);

@@ -9,29 +9,14 @@ public class Main {
         bst.put(1, "Ahmed");
         System.out.println(bst.valueIterator().toString());
         System.out.println(bst.size());
-        bst.deleteMax();
+        bst.delete(6);
+        bst.delete(8);
+//        bst.delete(1);
         System.out.println(bst.valueIterator().toString());
         System.out.println(bst.size());
-
-        bst.deleteMax();
-        System.out.println(bst.valueIterator().toString());
-        System.out.println(bst.size());
-        bst.deleteMax();
-        System.out.println(bst.valueIterator().toString());
-        System.out.println(bst.size());
-        bst.deleteMax();
-        System.out.println(bst.valueIterator().toString());
-        System.out.println(bst.size());
-        bst.put(4, "Bola");
-        System.out.println(bst.valueIterator().toString());
-        System.out.println(bst.size());
-        bst.deleteMax();
-        System.out.println(bst.valueIterator().toString());
-        System.out.println(bst.size());
-        bst.deleteMax();
-        System.out.println(bst.valueIterator().toString());
-        System.out.println(bst.size());
-        bst.deleteMax();
+        bst.delete(6);
+        bst.delete(3);
+        bst.delete(1);
         System.out.println(bst.valueIterator().toString());
         System.out.println(bst.size());
     }
