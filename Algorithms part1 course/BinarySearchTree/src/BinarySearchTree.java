@@ -137,25 +137,49 @@ public class BinarySearchTree<Key extends Comparable<Key>, Value> {
         else
             return size(current.left);
     }
-    public void deleteMin(){
+    public void deleteMin() {// recursive
         if(root == null)
             return;
-        if(root.left == null){
-            root = root.right;
-            return;
-        }
-        Node previous = root, current = root.left;
-        while(current.left != null){
-            previous = current;
-            current = current.left;
-        }
-        previous.count--;
-        if(current.right != null){
-            previous.left = current.right;
-        }else{
-            previous.left = null;
-        }
+        root = deleteMin(root);
     }
+    private Node deleteMin(Node x) {
+        if (x.left == null)
+            return x.right;
+        x.left = deleteMin(x.left);
+        x.count = 1 + size(x.left) + size(x.right);
+        return x;
+    }
+    public void deleteMax(){//recursive
+        if(root == null)
+            return;
+        root = deleteMax(root);
+    }
+    private Node deleteMax(Node current){
+        if(current.right == null)
+            return current.left;
+        current.right = deleteMax(current.right);
+        current.count = 1 + size(current.left) + size(current.right);
+        return current;
+    }
+//    public void deleteMin(){// not recursive
+//        if(root == null)
+//            return;
+//        if(root.left == null){
+//            root = root.right;
+//            return;
+//        }
+//        Node previous = root, current = root.left;
+//        while(current.left != null){
+//            previous = current;
+//            current = current.left;
+//        }
+//        previous.count--;
+//        if(current.right != null){
+//            previous.left = current.right;
+//        }else{
+//            previous.left = null;
+//        }
+//    }
     public Iterable<Key> keyIterator(){
         List<Key> list = new ArrayList<>();
         inorderKeys(root, list);
